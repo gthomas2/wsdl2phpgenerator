@@ -103,6 +103,14 @@ class TypeNode extends XmlNode
                 if ($minOccurs === '') {
                     return null;
                 }
+                // If the attribute is a string, we still need to return an integer if possible.
+                if (is_string($minOccurs)) {
+                    if (is_numeric($minOccurs)) {
+                        return intval($minOccurs);
+                    } else {
+                        return null; // Bad value in minOccurs.
+                    }
+                }
                 return $minOccurs;
             }
         }
