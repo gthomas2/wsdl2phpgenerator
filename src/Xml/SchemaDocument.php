@@ -89,8 +89,9 @@ class SchemaDocument extends XmlNode
     public function findTypeElement($name)
     {
         $type = null;
+        $xpath = '//s:simpleType[@name=%s]|//s:complexType[@name=%s]|//s:element[@name=%s]/s:complexType';
 
-        $elements = $this->xpath('//s:simpleType[@name=%s]|//s:complexType[@name=%s]', $name, $name);
+        $elements = $this->xpath($xpath, $name, $name, $name);
         if ($elements->length > 0) {
             $type = $elements->item(0);
         }
